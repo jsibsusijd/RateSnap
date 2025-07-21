@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>محفظتي - MajdX</title>
+  <style>
+    body {
+      background: linear-gradient(135deg, #11998e, #38ef7d);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+      margin: 0;
+    }
+    .container {
+      background: rgba(0,0,0,0.3);
+      padding: 2rem;
+      border-radius: 15px;
+      max-width: 400px;
+      width: 100%;
+      box-shadow: 0 0 20px rgba(0,0,0,0.4);
+      text-align: center;
+    }
+    h1 {
+      margin-bottom: 1rem;
+      font-weight: 700;
+      font-size: 1.8rem;
+    }
+    .balance {
+      font-size: 2.5rem;
+      margin: 1rem 0;
+      font-weight: 700;
+      color: #ffd700;
+    }
+    input[type="number"] {
+      width: 100%;
+      padding: 0.7rem;
+      margin: 0.7rem 0;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      outline: none;
+    }
+    button {
+      width: 48%;
+      padding: 0.8rem;
+      margin: 0.7rem 1%;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      color: #003366;
+    }
+    button.deposit {
+      background-color: #00d084;
+    }
+    button.deposit:hover {
+      background-color: #00b373;
+    }
+    button.withdraw {
+      background-color: #ffbb33;
+    }
+    button.withdraw:hover {
+      background-color: #ffaa00;
+    }
+    .message {
+      margin-top: 1rem;
+      font-size: 1rem;
+      font-weight: 600;
+      min-height: 1.5rem;
+    }
+    .back-link {
+      margin-top: 2rem;
+    }
+    .back-link a {
+      color: #ccc;
+      text-decoration: none;
+    }
+    .back-link a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>محفظتي - MajdX</h1>
+    <div>الرصيد الحالي:</div>
+    <div class="balance" id="balance">0.00 $</div>
+    <input type="number" id="amount" placeholder="أدخل المبلغ" min="0" />
+    <div>
+      <button class="deposit" onclick="deposit()">إيداع</button>
+      <button class="withdraw" onclick="withdraw()">سحب</button>
+    </div>
+    <div class="message" id="message"></div>
+    <div class="back-link">
+      <a href="index.html">⬅ العودة للرئيسية</a>
+    </div>
+  </div>
+
+  <script>
+    let balance = 0;
+
+    function updateBalance() {
+      document.getElementById('balance').textContent = balance.toFixed(2) + ' $';
+    }
+
+    function deposit() {
+      const amountInput = document.getElementById('amount');
+      const amount = parseFloat(amountInput.value);
+      const message = document.getElementById('message');
+
+      if (isNaN(amount) || amount <= 0) {
+        message.textContent = 'الرجاء إدخال مبلغ صالح للإيداع.';
+        return;
+      }
+
+      balance += amount;
+      updateBalance();
+      message.textContent = `تم إيداع ${amount.toFixed(2)} $.`;
+      amountInput.value = '';
+    }
+
+    function withdraw() {
+      const amountInput = document.getElementById('amount');
+      const amount = parseFloat(amountInput.value);
+      const message = document.getElementById('message');
+
+      if (isNaN(amount) || amount <= 0) {
+        message.textContent = 'الرجاء إدخال مبلغ صالح للسحب.';
+        return;
+      }
+
+      if (amount > balance) {
+        message.textContent = 'الرصيد غير كافٍ للسحب.';
+        return;
+      }
+
+      balance -= amount;
+      updateBalance();
+      message.textContent = `تم سحب ${amount.toFixed(2)} $.`;
+      amountInput.value = '';
+    }
+
+    // تحديث الرصيد عند تحميل الصفحة
+    window.onload = updateBalance;
+  </script>
+</body>
+</html>
