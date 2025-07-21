@@ -1,80 +1,81 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>إنشاء حساب - MajdX</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>إنشاء حساب - RateSnap</title>
   <style>
     body {
-      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      background: linear-gradient(135deg, #00b4db, #0083b0);
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       color: #fff;
+      min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      padding: 1rem;
       margin: 0;
     }
-
-    .register-box {
-      background-color: rgba(255,255,255,0.05);
-      padding: 40px;
+    .container {
+      background: rgba(255, 255, 255, 0.1);
       border-radius: 15px;
-      box-shadow: 0 0 15px #000;
-      width: 90%;
+      padding: 2rem;
       max-width: 400px;
-    }
-
-    h2 {
-      margin-bottom: 25px;
+      width: 100%;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
       text-align: center;
+    }
+    h1 {
+      margin-bottom: 1rem;
+      font-weight: 700;
       font-size: 1.8rem;
+      letter-spacing: 2px;
     }
-
-    input {
+    input[type="text"],
+    input[type="tel"],
+    input[type="password"] {
       width: 100%;
-      padding: 15px;
-      margin: 10px 0;
+      padding: 0.6rem;
       border: none;
-      border-radius: 10px;
+      border-radius: 8px;
       font-size: 1rem;
+      margin: 0.8rem 0;
+      outline: none;
     }
-
     button {
-      width: 100%;
-      padding: 15px;
-      background-color: #00d084;
-      color: #000;
+      margin-top: 1.5rem;
+      background-color: #ffbb33;
       border: none;
       border-radius: 10px;
-      font-size: 1rem;
+      padding: 0.8rem;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #003366;
       cursor: pointer;
-      transition: background 0.3s;
+      transition: background-color 0.3s ease;
+      width: 100%;
     }
-
     button:hover {
-      background-color: #00b373;
+      background-color: #ffaa00;
     }
-
     .back-link {
-      margin-top: 20px;
-      text-align: center;
+      margin-top: 1.5rem;
+      color: #ccc;
     }
-
     .back-link a {
       color: #ccc;
       text-decoration: none;
     }
-
     .back-link a:hover {
       text-decoration: underline;
     }
   </style>
 </head>
 <body>
-  <div class="register-box">
-    <h2>إنشاء حساب جديد</h2>
-    <form onsubmit="alert('تم إنشاء الحساب بنجاح!')">
+
+  <div class="container">
+    <h1>إنشاء حساب جديد</h1>
+    <form onsubmit="alert('تم إنشاء الحساب بنجاح!'); return false;">
       <input type="text" placeholder="الاسم الكامل" required />
       <input type="tel" placeholder="رقم الهاتف" required />
       <input type="password" placeholder="كلمة المرور" required />
@@ -82,8 +83,9 @@
       <button type="submit">إنشاء حساب</button>
     </form>
     <div class="back-link">
-      <a href="login.html">⬅ لدي حساب؟ تسجيل الدخول</a>
+      <a href="login.html">⬅ العودة إلى تسجيل الدخول</a>
     </div>
   </div>
+
 </body>
 </html>
