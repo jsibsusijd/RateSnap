@@ -1,2 +1,211 @@
-# RateSnap
-💱 RateSnap — محول عملات سريع وفوري بأسعار صرف حقيقية من الإنترنت، سهل الاستخدام وبدون تعقيد.
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>RateSnap 💱 محول العملات الذكي</title>
+<style>
+  /* Reset */
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #00b4db, #0083b0);
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+  }
+
+  .container {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 2rem;
+    max-width: 400px;
+    width: 100%;
+    box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    text-align: center;
+  }
+
+  h1 {
+    margin-bottom: 1rem;
+    font-weight: 700;
+    font-size: 1.8rem;
+    letter-spacing: 2px;
+  }
+
+  label {
+    display: block;
+    margin: 1rem 0 0.5rem 0;
+    font-weight: 600;
+  }
+
+  select, input[type="number"] {
+    width: 100%;
+    padding: 0.6rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+  }
+
+  button {
+    margin-top: 1.5rem;
+    background-color: #ffbb33;
+    border: none;
+    border-radius: 10px;
+    padding: 0.8rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #003366;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+  }
+
+  button:hover {
+    background-color: #ffaa00;
+  }
+
+  .result {
+    margin-top: 1.5rem;
+    font-size: 1.3rem;
+    font-weight: 600;
+    min-height: 2rem;
+  }
+
+  footer {
+    margin-top: 2rem;
+    font-size: 0.8rem;
+    color: #ccc;
+  }
+
+  /* Responsive */
+  @media (max-width: 450px) {
+    .container {
+      max-width: 100%;
+      padding: 1rem;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>RateSnap 💱 محول العملات الذكي</h1>
+
+  <label for="from-currency">العملة من</label>
+  <select id="from-currency"></select>
+
+  <label for="amount">المبلغ</label>
+  <input type="number" id="amount" placeholder="أدخل المبلغ" min="0" value="1" />
+
+  <label for="to-currency">العملة إلى</label>
+  <select id="to-currency"></select>
+
+  <button id="convert-btn">حوّل الآن</button>
+
+  <div class="result" id="result"></div>
+
+  <footer>© 2025 RateSnap - جميع الحقوق محفوظة</footer>
+</div>
+
+<script>
+  const apiUrl = 'https://api.exchangerate.host/latest';
+  const fromCurrency = document.getElementById('from-currency');
+  const toCurrency = document.getElementById('to-currency');
+  const amountInput = document.getElementById('amount');
+  const convertBtn = document.getElementById('convert-btn');
+  const resultDiv = document.getElementById('result');
+
+  let rates = {};
+
+  // جلب قائمة العملات من API
+  async function fetchCurrencies() {
+    try {
+      const res = await fetch('https://api.exchangerate.host/symbols');
+      const data = await res.json();
+      const symbols = data.symbols;
+
+      for (const code in symbols) {
+        const optionFrom = document.createElement('option');
+        optionFrom.value = code;
+        optionFrom.textContent = `${code} - ${symbols[code].description}`;
+        fromCurrency.appendChild(optionFrom);
+
+        const optionTo = document.createElement('option');
+        optionTo.value = code;
+        optionTo.textContent = `${code} - ${symbols[code].description}`;
+        toCurrency.appendChild(optionTo);
+      }
+
+      // تعيين عملتين افتراضيتين
+      fromCurrency.value = 'USD';
+      toCurrency.value = 'EUR';
+
+    } catch (error) {
+      resultDiv.textContent = 'خطأ في جلب قائمة العملات.';
+      convertBtn.disabled = true;
+    }
+  }
+
+  // جلب أسعار الصرف
+  async function fetchRates(base = 'USD') {
+    try {
+      const res = await fetch(`${apiUrl}?base=${base}`);
+      const data = await res.json();
+      rates = data.rates;
+    } catch (error) {
+      resultDiv.textContent = 'خطأ في جلب أسعار الصرف.';
+      convertBtn.disabled = true;
+    }
+  }
+
+  // تحويل العملات
+  async function convert() {
+    const from = fromCurrency.value;
+    const to = toCurrency.value;
+    const amount = parseFloat(amountInput.value);
+
+    if (isNaN(amount) || amount <= 0) {
+      resultDiv.textContent = 'الرجاء إدخال مبلغ صحيح أكبر من صفر.';
+      return;
+    }
+
+    resultDiv.textContent = 'جارٍ التحويل...';
+
+    if (!rates[from]) {
+      await fetchRates(from);
+    }
+
+    const rate = rates[to];
+    if (!rate) {
+      resultDiv.textContent = 'لا يمكن الحصول على سعر الصرف.';
+      return;
+    }
+
+    const converted = (amount * rate).toFixed(4);
+    resultDiv.textContent = `${amount} ${from} = ${converted} ${to}`;
+  }
+
+  // تهيئة القوائم والأسعار عند التحميل
+  window.onload = async () => {
+    await fetchCurrencies();
+    await fetchRates('USD');
+  };
+
+  convertBtn.addEventListener('click', convert);
+</script>
+
+</body>
+  </html>
+  
