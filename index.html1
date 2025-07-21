@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MajdX - استثمر بثقة</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to bottom right, #001f3f, #0074D9);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      height: 100vh;
+      justify-content: center;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 1.2rem;
+      max-width: 500px;
+      margin-bottom: 40px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    button {
+      background-color: #ffcc00;
+      color: #000;
+      border: none;
+      padding: 15px 30px;
+      font-size: 1rem;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #ffaa00;
+    }
+
+    footer {
+      position: absolute;
+      bottom: 10px;
+      font-size: 0.9rem;
+      color: #ccc;
+    }
+  </style>
+</head>
+<body>
+  <h1>MajdX 💰</h1>
+  <p>منصتك الذكية للاستثمار، الربح، والمحفظة الإلكترونية الآمنة</p>
+
+  <div class="buttons">
+    <button onclick="alert('قريبًا: تسجيل الدخول')">تسجيل الدخول</button>
+    <button onclick="alert('قريبًا: إنشاء حساب')">إنشاء حساب</button>
+    <button onclick="alert('قريبًا: ابدأ الاستثمار')">استثمر الآن</button>
+  </div>
+
+  <footer>© 2025 MajdX — جميع الحقوق محفوظة</footer>
+</body>
+</html>
