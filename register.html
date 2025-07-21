@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>إنشاء حساب - MajdX</title>
+  <style>
+    body {
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .register-box {
+      background-color: rgba(255,255,255,0.05);
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px #000;
+      width: 90%;
+      max-width: 400px;
+    }
+
+    h2 {
+      margin-bottom: 25px;
+      text-align: center;
+      font-size: 1.8rem;
+    }
+
+    input {
+      width: 100%;
+      padding: 15px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+    }
+
+    button {
+      width: 100%;
+      padding: 15px;
+      background-color: #00d084;
+      color: #000;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background-color: #00b373;
+    }
+
+    .back-link {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .back-link a {
+      color: #ccc;
+      text-decoration: none;
+    }
+
+    .back-link a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="register-box">
+    <h2>إنشاء حساب جديد</h2>
+    <form onsubmit="alert('تم إنشاء الحساب بنجاح!')">
+      <input type="text" placeholder="الاسم الكامل" required />
+      <input type="tel" placeholder="رقم الهاتف" required />
+      <input type="password" placeholder="كلمة المرور" required />
+      <input type="password" placeholder="تأكيد كلمة المرور" required />
+      <button type="submit">إنشاء حساب</button>
+    </form>
+    <div class="back-link">
+      <a href="login.html">⬅ لدي حساب؟ تسجيل الدخول</a>
+    </div>
+  </div>
+</body>
+</html>
